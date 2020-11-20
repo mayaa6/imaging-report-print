@@ -1,0 +1,183 @@
+body {
+    background-color: white;
+    font-family: "FangSong";
+    font-size: 16px;
+    font-weight: normal;
+    color: #000;
+    min-width: 800px;
+    min-height: 1200px;
+    background-color: #e9e7db;
+}
+
+#box {
+    position: relative;
+}
+#control {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #264653;
+    height: 50px;
+    text-align: center;
+    z-index: 100;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.control-button {
+    width: 100px;
+    text-align: center;
+    padding: 4px 20px;
+    margin-top: 8px;
+}
+#report {
+    width: 794px;
+    height: 1123px;
+    margin: 10px auto;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px 50px;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+#report h1 {
+    font-family: "LiSu";
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+#report input {
+    display: inline;
+    height: 30px;
+}
+#report select {
+    height: 30px;
+    line-height: 30px;
+}
+
+#report section {
+    margin: 10px auto;
+    position: relative;
+}
+
+.horitonal-row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+#dateBlock input {
+    width: 120px;
+}
+
+#imageIDBlock input{
+    width: 100px;
+}
+
+#nameBlock input {
+    width: 100px;
+}
+
+#genderBlock select {
+    width: 60px;
+}
+
+#ageBlock input {
+    width: 80px;
+}
+
+
+#departmentBlock select {
+    width: 120px;
+}
+
+#bodyPartBlock input {
+    width: 120px;
+}
+
+#typeBlock {
+    width: 100px;
+}
+
+
+#methodBlock input {
+    width: 100px;
+}
+
+#row1, #row2, #row7 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
+.text-row {
+    position: relative;
+}
+
+.text-row h2 {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+#report textarea {
+    resize: none;
+}
+
+.text-row textarea {
+    width: 90%;
+    margin: 5px 40px;
+}
+
+#row4 textarea, #row5 textarea {
+    height: 250px;
+}
+
+#row6 textarea {
+    height: 100px;
+}
+
+#footer p {
+    font-family: "KaiTi", "DFKai-SB" ,"KaiTi_GB2312";
+    font-size: 14px;
+}
+
+
+@media print {
+    body {
+        background-color: none;
+        min-width: 794px;
+        min-height: 1123px;
+        width: 794px;
+        height: 1123px;
+        user-select: none;
+    }
+    #control {
+        display: none;
+    }
+    #report {
+        box-shadow: none;
+    }
+    #report input {
+        border: none;
+    }
+    #report textarea {
+        outline: none;
+        border: none;
+    }
+    #report select {
+        border: none;
+        appearance: none;
+    }
+    select::-ms-expand {
+        display: none;
+    }
+    ::-moz-selection{
+        color: #000;
+        background: #fff;
+    }
+    ::selection{
+        color: #000;
+        background: #fff;
+    }
+}
