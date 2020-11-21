@@ -11,8 +11,9 @@
 <body class="basic">
     <div id="box">
         <div id="control">
-            <button class="control-button" onclick="submitForm()">打印</button>
-            <button class="control-button" onclick="resetFrom()">复位</button>
+            <button class="control-button" id="printBtn" onclick="submitForm()">打印</button>
+            <button class="control-button" id="PDFBtn">保存PDF</button>
+            <button class="control-button" id="resetBtn">复位</button>
         </div>
         <article id="report">
             <form id="reportForm" method="post" action="/" data-parsley-validate="">
@@ -20,17 +21,17 @@
                 <section class="horitonal-row" id="row1">
                     <div class="row-block" id="dateBlock">
                         <span>检查日期：</span>
-                        <input type="text" name="reportDate" id="dateInput" required value="2020-09-18"/>
+                        <input type="text" name="reportDate" id="dateInput" required value=""/>
                     </div>
                     <div class="row-block" id="imageIDBlock">
                         <span>影像号：</span>
-                        <input type="text" name="imageID" id="imageIDInput" required value="7232945353"/>
+                        <input type="text" name="imageID" id="imageIDInput" required value=""/>
                     </div>                
                 </section>
                 <section class="horitonal-row" id="row2">
                     <div  class="row-block" id="nameBlock">
                         <span>姓名：</span>
-                        <input type="text" name="patientName" id="nameInput" required value="王风江"/>
+                        <input type="text" name="patientName" id="nameInput" required value=""/>
                     </div>
                     <div class="row-block" id="genderBlock">
                         <span>性别：</span>
@@ -41,7 +42,7 @@
                     </div>
                     <div class="row-block" id="ageBlock">
                         <span>年龄：</span>
-                        <input type="text" name="patientAge" id="ageInput" required value="50岁"/>
+                        <input type="text" name="patientAge" id="ageInput" required value=""/>
                     </div>
                     <div class="row-block" id="departmentBlock">
                         <span>科别：</span>
@@ -97,20 +98,6 @@
             </form>          
         </article>
     </div>
-    <script type="text/javascript">
-        (function() {
-            var reportForm = document.getElementById("reportForm");
-            function submitForm() {
-                window.print();
-                return
-            }
-            function resetFrom() {
-                reportForm.reset();
-                return 
-            }
-            window.submitForm = submitForm;
-            window.resetFrom = resetFrom;
-        })();
-    </script>
+    <script src="./render.js"></script>
 </body>
 </html>

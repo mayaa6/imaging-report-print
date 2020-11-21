@@ -1,14 +1,22 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const fs = require('fs')
+const os = require('os')
 const path = require('path')
+const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron')
+
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 900,
     height: 600,
+    minWidth: 900,
+    minHeight: 600,
+    title: "影像学报告系统",
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
@@ -41,3 +49,34 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on('print-to-pdf', function (event) {
+  const pdfPath = path.join(os.tmpdir(), 'print.pdf')
+  const win = BrowserWindow.fromWebContents(event.sender)
+  //Use default printing options
+  win.webContents.printToPDF({}, function (error, data) {
+    if (error) throw error
+    fs.writeFile(pdfPath, data, function (error) {
+      if (error) {
+        throw error
+      }
+      shell.openExternal('file://' + pdfPath)
+      event.sender.send('wrote-pdf', pdfPath)
+    })
+  })
+})
+
+ipcMain.on('confirm-form-reset', (event) => {
+  const options = {
+    type: 'warning',
+    title: '警告',
+    message: "是否清除所有信息？",
+    defaultId: 0,
+    buttons: ['Yes', 'No']
+  }
+  dialog.showMessageBox(options).then(
+    (result) => {
+      event.sender.send('form-reset-result', result)
+    }
+  ) 
+})
