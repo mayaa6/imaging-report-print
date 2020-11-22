@@ -52,11 +52,13 @@ app.on('window-all-closed', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('print-to-pdf', function (event) {
+ipcMain.on('print-to-pdf', function (event, file_name) {
   const win = BrowserWindow.fromWebContents(event.sender)
   
+  const defaultPath = 'C:\\Users\\lenovo\Desktop\\' + file_name
   const dialogOptions = {
     title: '保存PDF',
+    defaultPath: defaultPath,
     filters: [
       { name: 'PDF', extensions: ['pdf'] }
     ]
@@ -74,6 +76,10 @@ ipcMain.on('print-to-pdf', function (event) {
           }).catch(error=>{console.error(error)})
     }
   ).catch(error=>{console.error(error)})
+})
+
+ipcMain.on('form-unfinished', (event) => {
+  dialog.showErrorBox("错误", "报告单没有填写完整！")
 })
 
 ipcMain.on('confirm-form-reset', (event) => {
