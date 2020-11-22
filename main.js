@@ -4,6 +4,7 @@ const os = require('os')
 const path = require('path')
 const {app, BrowserWindow, ipcMain, shell, dialog} = require('electron')
 
+let rootWindow
 
 function createWindow () {
   // Create the browser window.
@@ -25,13 +26,14 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+  return mainWindow
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  rootWindow = createWindow()
   
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -51,19 +53,27 @@ app.on('window-all-closed', function () {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('print-to-pdf', function (event) {
-  const pdfPath = path.join(os.tmpdir(), 'print.pdf')
   const win = BrowserWindow.fromWebContents(event.sender)
-  //Use default printing options
-  win.webContents.printToPDF({}, function (error, data) {
-    if (error) throw error
-    fs.writeFile(pdfPath, data, function (error) {
-      if (error) {
-        throw error
-      }
-      shell.openExternal('file://' + pdfPath)
-      event.sender.send('wrote-pdf', pdfPath)
-    })
-  })
+  
+  const dialogOptions = {
+    title: '保存PDF',
+    filters: [
+      { name: 'PDF', extensions: ['pdf'] }
+    ]
+  }
+  dialog.showSaveDialog(rootWindow, dialogOptions).then(
+    (filename) => {
+      const pdfPath = filename.filePath
+      win.webContents.printToPDF({}).then(
+        data => {
+          fs.writeFile(pdfPath, data, (error) => {
+            if (error) throw error
+            shell.openExternal('file://' + pdfPath)
+            event.sender.send('wrote-pdf', pdfPath)
+          })
+          }).catch(error=>{console.error(error)})
+    }
+  ).catch(error=>{console.error(error)})
 })
 
 ipcMain.on('confirm-form-reset', (event) => {
@@ -74,7 +84,7 @@ ipcMain.on('confirm-form-reset', (event) => {
     defaultId: 0,
     buttons: ['Yes', 'No']
   }
-  dialog.showMessageBox(options).then(
+  dialog.showMessageBox(rootWindow, options).then(
     (result) => {
       event.sender.send('form-reset-result', result)
     }

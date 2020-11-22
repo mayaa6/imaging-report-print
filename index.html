@@ -11,9 +11,8 @@
 <body class="basic">
     <div id="box">
         <div id="control">
-            <button class="control-button" id="printBtn" onclick="submitForm()">打印</button>
-            <button class="control-button" id="PDFBtn">保存PDF</button>
-            <button class="control-button" id="resetBtn">复位</button>
+            <button class="control-button" id="PDFBtn">打 印</button>
+            <button class="control-button" id="resetBtn">复 位</button>
         </div>
         <article id="report">
             <form id="reportForm" method="post" action="/" data-parsley-validate="">
@@ -21,7 +20,7 @@
                 <section class="horitonal-row" id="row1">
                     <div class="row-block" id="dateBlock">
                         <span>检查日期：</span>
-                        <input type="text" name="reportDate" id="dateInput" required value=""/>
+                        <input type="text" name="reportDate" id="dateInput" disabled required value=""/>
                     </div>
                     <div class="row-block" id="imageIDBlock">
                         <span>影像号：</span>
@@ -89,7 +88,7 @@
                     </div>
                     <div>
                         <span>报告日期：</span>
-                        <input type="text" name="reportTime" id="reportTimeInput" required value="2020-09-14 12:39"/>
+                        <input type="text" name="reportTime" id="reportTimeInput" disabled required value="" />
                     </div>                         
                 </section>
                 <footer id="footer">

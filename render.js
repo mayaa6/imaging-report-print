@@ -11,12 +11,16 @@ const {
 const printPDFBtn = document.getElementById('PDFBtn')
 
 printPDFBtn.addEventListener('click', function (event) {
+    const now =  new Date()
+    const current_date = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+    document.getElementById("dateInput").value = current_date
+    document.getElementById("reportTimeInput").value = current_date + " " + now.getHours() + ":" + now.getMinutes()
+    
     ipcRenderer.send('print-to-pdf')
 })
 
 ipcRenderer.on('wrote-pdf', function (event, path) {
-    const message = ` PDF saved to ${path}`
-    document.getElementById('pdf-path').innerHTML = message
+    reportForm.reset()
 })
 
 const reportForm = document.getElementById("reportForm")
