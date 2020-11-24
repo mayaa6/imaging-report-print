@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "medical-imaging-report",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An Electron App For Writing Medical Imaging Report",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -16,7 +16,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Haochen Zhao",
+  "email": "enarkadia@gmail.com",
   "license": "CC0-1.0",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
@@ -31,12 +32,14 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./icon/logo.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "electron_quick_start"
+            "name": "medical-imaging-report"
           }
         },
         {

@@ -14,6 +14,7 @@ function createWindow () {
     minWidth: 900,
     minHeight: 600,
     title: "影像学报告系统",
+    icon: "icon/logo.ico",
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
