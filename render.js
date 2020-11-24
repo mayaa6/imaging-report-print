@@ -8,6 +8,14 @@ const {
     ipcRenderer
 } = require('electron')
 
+if(typeof(String.prototype.trim) === "undefined")
+{
+    String.prototype.trim = function() 
+    {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+
 const printPDFBtn = document.getElementById('PDFBtn')
 
 const formValidate = () => {
@@ -32,7 +40,7 @@ printPDFBtn.addEventListener('click', function (event) {
     const is_form_validated = formValidate()
     console.log(is_form_validated)
     if (is_form_validated) {
-        const file_name = "[" + document.getElementById("dateInput").value + "]" + document.getElementById("nameInput").value
+        const file_name = "[" + document.getElementById("dateInput").value + "]" + document.getElementById("nameInput").value.trim()+"_" + document.getElementById("bodyPartInput").value.trim()
         ipcRenderer.send('print-to-pdf', file_name)
     } else {
         ipcRenderer.send('form-unfinished')
