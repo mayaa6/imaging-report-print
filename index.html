@@ -16,11 +16,16 @@
         </div>
         <article id="report">
             <form id="reportForm" method="post" action="/" data-parsley-validate="">
-                <h1>北京中宇普惠诊所影像学报告单</h1>
+                <h1>北京中宇普惠诊所超声检查报告</h1>
                 <section class="horitonal-row" id="row1">
                     <div class="row-block" id="dateBlock">
                         <span>检查日期：</span>
                         <input type="text" name="reportDate" id="dateInput" disabled required value=""/>
+                    </div>
+                    <div class="row-block" id="deviceBlock">
+                        <span>设  备：</span>
+                        <span>Philips DuraDiagnost C50</span>
+                        <!-- <input type="text" name="deviceBlock" id="deviceInput" disabled required value="Philips DuraDiagnost C50"/> -->
                     </div>
                     <div class="row-block" id="imageIDBlock">
                         <span>影像号：</span>
@@ -55,46 +60,56 @@
                     </div>                
                 </section>      
                 <section class="horitonal-row" id="row3">
+                    <div class="row-block" id="methodBlock">
+                        <span>检查项目：</span>
+                        <input type="text" name="imageMethod" id="methodInput" required value=""/> 
+                    </div>                    
                     <div class="row-block" id="bodyPartBlock">
                         <span>检查部位：</span>
                         <input type="text" name="bodyPart" id="bodyPartInput" required value=""/> 
-                    </div>
-                    <div class="row-block" id="typeBlock">
-                        <strong>CR</strong>
-                    </div>
-                    <div class="row-block" id="methodBlock">
-                        <span>检查方法：</span>
-                        <input type="text" name="imageMethod" id="methodInput" required value=""/> 
-                    </div>                
+                    </div>              
                 </section>
                 <section class="text-row" id="row4">
-                    <h2>影像所见：</h2>
-                    <textarea name="imageFinding" id="imageFindingTextArea" required></textarea>
+                    <div id="imageJPGArea">
+                        <label class="image-display" for="jpgFile1" id="imageJPG1">
+                            <input type="file" id="jpgFile1" name="jpgFile1" required>
+                            <span>点击添加图片</span>
+                            <button class="image-remove-btn" id="imageRemoveBtn1">删除</button>
+                        </label>
+                        <label class="image-display" for="jpgFile2" id="imageJPG2">
+                            <input type="file" id="jpgFile2" name="jpgFile2" required>
+                            <span>点击添加图片</span>
+                            <button class="image-remove-btn" id="imageRemoveBtn2">删除</button>
+                        </label>
+                    </div>
                 </section>
                 <section class="text-row" id="row5">
-                    <h2>初步印象：</h2>
+                    <h2>检查所见：</h2>
                     <textarea name="firstImpression" id="firstImpressionTextArea" required></textarea>
                 </section>
                 <section class="text-row" id="row6">
-                    <h2>补充意见：</h2>
+                    <h2>超声印象：</h2>
                     <textarea name="addtionalCommentary" id="addtionalCommentaryTextArea"></textarea>
                 </section>
                 <section class="horitonal-row" id="row7">
                     <div>
-                        <span>初写医生：</span>
-                        <img src="images/zudegui.png" title="祖德贵" width="80">
+                        <span>检查者：</span>
+                        <input type="text" name="mainDoc" id="mainDocInput" required value="" />
                     </div>
                     <div>
-                        <span>审核医生：</span>
-                        <img src="images/zudegui.png" title="祖德贵" width="80">
+                        <span>审核者：</span>
+                        <input type="text" name="secondDoc" id="secondDocInput" required value="" />
                     </div>
                     <div>
-                        <span>报告日期：</span>
+                        <span>记录员：</span>
+                        <input type="text" name="assistantDoc" id="assistantDocInput" required value="" />
+                    </div>
+                    <div>
                         <input type="text" name="reportTime" id="reportTimeInput" disabled required value="" />
                     </div>                         
                 </section>
                 <footer id="footer">
-                    <p>本报告谨供临床医生参考</p>
+                    <p>告知：超声检查受到患者自身（如肥胖、气体干扰、病变位置特殊、疾病所处不同阶段等）及设备因素的影响；不同检查者对图像判读可能存在差异；此检查结果仅为临床医师提供辅助诊治依据。</p>
                 </footer>  
             </form>          
         </article>
