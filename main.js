@@ -67,14 +67,16 @@ ipcMain.on('print-to-pdf', function (event, file_name) {
   dialog.showSaveDialog(rootWindow, dialogOptions).then(
     (filename) => {
       const pdfPath = filename.filePath
-      win.webContents.printToPDF({}).then(
-        data => {
-          fs.writeFile(pdfPath, data, (error) => {
-            if (error) throw error
-            shell.openExternal('file://' + pdfPath)
-            event.sender.send('wrote-pdf', pdfPath)
-          })
-          }).catch(error=>{console.error(error)})
+      if (pdfPath.length>0) {
+        win.webContents.printToPDF({}).then(
+          data => {
+            fs.writeFile(pdfPath, data, (error) => {
+              if (error) throw error
+              shell.openExternal('file://' + pdfPath)
+              event.sender.send('wrote-pdf', pdfPath)
+            })
+            }).catch(error=>{console.error(error)})
+      }
     }
   ).catch(error=>{console.error(error)})
 })
